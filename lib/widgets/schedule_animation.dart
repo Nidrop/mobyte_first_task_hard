@@ -1,8 +1,6 @@
 import 'package:first_task_hard/style/app_styles.dart';
 import 'package:first_task_hard/widgets/common/shadow_container.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ScheduleAnimation extends StatelessWidget {
@@ -14,15 +12,29 @@ class ScheduleAnimation extends StatelessWidget {
           CurvedAnimation(
             parent: controller,
             curve: const Interval(
-              0.125,
+              0,
               0.250,
               curve: Curves.ease,
+            ),
+          ),
+        ),
+        redColor = IntTween(
+          begin: 0,
+          end: 255,
+        ).animate(
+          CurvedAnimation(
+            parent: controller,
+            curve: const Interval(
+              0.250,
+              1.0,
+              curve: Curves.linear,
             ),
           ),
         );
 
   final AnimationController controller;
   final Animation<double> width;
+  final Animation<int> redColor;
   final String text = 'Нет расписания!';
 
   @override
@@ -57,8 +69,9 @@ class ScheduleAnimation extends StatelessWidget {
             height: (width.value >= 65.h) ? 65.h : width.value,
             child: Center(
               child: Text(
-                text,
-                style: AppStyles.subheadTextStyle,
+                (width.value > 150.w) ? text : '',
+                style: AppStyles.subheadTextStyle.copyWith(
+                    color: Color.fromARGB(255, redColor.value, 73, 45)),
               ),
             ))
       ],

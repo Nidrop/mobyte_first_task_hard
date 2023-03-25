@@ -1,4 +1,4 @@
-import 'package:first_task_hard/widgets/common/animation/schedule_animation.dart';
+import 'package:first_task_hard/widgets/schedule_animation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
